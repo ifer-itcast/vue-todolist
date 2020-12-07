@@ -45,5 +45,9 @@ export default new Vuex.Store({
       })
     }
   },
-  modules: {}
+  getters: {
+    unDoneLength(state) {
+      return state.list.filter(x => !x.done).length
+    }
+  }
 })

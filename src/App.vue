@@ -8,7 +8,7 @@
     />
     <a-button type="primary" @click="addItemToList">添加事项</a-button>
 
-    <a-list bordered :dataSource="list" class="dt_list">
+    <a-list bordered :dataSource="infoList" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- 复选框 -->
         <a-checkbox :checked="item.done" @change="e => cbStatusChanged(e, item.id)">{{ item.info }}</a-checkbox>
@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     ...mapState(['list', 'inputValue', 'viewKey']),
-    ...mapGetters(['unDoneLength'])
+    ...mapGetters(['unDoneLength', 'infoList'])
   },
   created() {
     this.$store.dispatch('getList')

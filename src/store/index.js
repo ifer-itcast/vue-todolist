@@ -57,6 +57,18 @@ export default new Vuex.Store({
   getters: {
     unDoneLength(state) {
       return state.list.filter(x => !x.done).length
+    },
+    infoList(state) {
+      if (state.viewKey === 'all') {
+        return state.list
+      }
+      if (state.viewKey === 'undone') {
+        return state.list.filter(x => !x.done)
+      }
+      if (state.viewKey === 'done') {
+        return state.list.filter(x => x.done)
+      }
+      return state.list
     }
   }
 })

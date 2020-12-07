@@ -26,6 +26,11 @@ export default new Vuex.Store({
       }
       state.list.push(obj)
       state.inputValue = ''
+    },
+    // 删除
+    removeItem(state, id) {
+      const idx = state.list.findIndex(item => item.id === id)
+      if (idx !== -1) state.list.splice(idx, 1)
     }
   },
   actions: {

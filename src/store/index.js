@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     list: [],
     inputValue: 'x',
-    nextId: 5
+    nextId: 5,
+    viewKey: 'all'
   },
   mutations: {
     initList(state, list) {
@@ -40,6 +41,10 @@ export default new Vuex.Store({
     // 清除已完成，即保留未完成
     cleanDone(state) {
       state.list = state.list.filter(x => !x.done)
+    },
+    // 修改视图的显示状态
+    changeViewKey(state, key) {
+      state.viewKey = key
     }
   },
   actions: {

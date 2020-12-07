@@ -1,6 +1,11 @@
 <template>
   <div id="app">
-    <a-input placeholder="请输入任务" class="my_ipt" />
+    <a-input
+      placeholder="请输入任务"
+      class="my_ipt"
+      :value="inputValue"
+      @change="handleInputChange"
+    />
     <a-button type="primary">添加事项</a-button>
 
     <a-list bordered :dataSource="list" class="dt_list">
@@ -29,25 +34,21 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
   name: 'app',
   data() {
-    return {
-      list: [
-        {
-          id: 0,
-          info: 'Racing car sprays burning fuel into crowd.',
-          done: false
-        },
-        { id: 1, info: 'Japanese princess to wed commoner.', done: false },
-        {
-          id: 2,
-          info: 'Australian walks 100km after outback crash.',
-          done: false
-        },
-        { id: 3, info: 'Man charged over missing wedding girl.', done: false },
-        { id: 4, info: 'Los Angeles battles huge wildfires.', done: false }
-      ]
+    return {}
+  },
+  computed: {
+    ...mapState(['list', 'inputValue'])
+  },
+  created() {
+    this.$store.dispatch('getList')
+  },
+  methods: {
+    handleInputChange(e) {
+      this.$store.commit('setInputValue', e.target.value)
     }
   }
 }

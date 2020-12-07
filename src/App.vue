@@ -11,7 +11,7 @@
     <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
         <!-- 复选框 -->
-        <a-checkbox :checked="item.done">{{ item.info }}</a-checkbox>
+        <a-checkbox :checked="item.done" @change="e => cbStatusChanged(e, item.id)">{{ item.info }}</a-checkbox>
         <!-- 删除链接 -->
         <a slot="actions" @click="removeItemById(item.id)">删除</a>
       </a-list-item>
@@ -50,14 +50,25 @@ export default {
     handleInputChange(e) {
       this.$store.commit('setInputValue', e.target.value)
     },
+    // 增
     addItemToList() {
       if (this.inputValue.trim().length <= 0) {
         return this.$message.warning('文本框内容不能为空！')
       }
       this.$store.commit('addItem')
     },
+    // 删
     removeItemById(id) {
       this.$store.commit('removeItem', id)
+    },
+    // 改
+    cbStatusChanged(e, id) {
+      // e.target
+      const param = {
+        id,
+        done: e.target.checked
+      }
+      this.$store.commit('changeStatus', param)
     }
   }
 }

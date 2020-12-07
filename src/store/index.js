@@ -31,6 +31,11 @@ export default new Vuex.Store({
     removeItem(state, id) {
       const idx = state.list.findIndex(item => item.id === id)
       if (idx !== -1) state.list.splice(idx, 1)
+    },
+    // 改
+    changeStatus(state, param) {
+      const idx = state.list.findIndex(item => item.id === param.id)
+      if (idx !== -1) state.list[idx].done = param.done
     }
   },
   actions: {

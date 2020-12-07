@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     list: [],
-    inputValue: 'x'
+    inputValue: 'x',
+    nextId: 5
   },
   mutations: {
     initList(state, list) {
@@ -15,6 +16,16 @@ export default new Vuex.Store({
     },
     setInputValue(state, val) {
       state.inputValue = val
+    },
+    // 添加
+    addItem(state) {
+      const obj = {
+        id: state.nextId++,
+        info: state.inputValue.trim(),
+        done: false
+      }
+      state.list.push(obj)
+      state.inputValue = ''
     }
   },
   actions: {
@@ -24,6 +35,5 @@ export default new Vuex.Store({
       })
     }
   },
-  modules: {
-  }
+  modules: {}
 })

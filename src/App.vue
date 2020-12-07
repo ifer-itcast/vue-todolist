@@ -6,7 +6,7 @@
       :value="inputValue"
       @change="handleInputChange"
     />
-    <a-button type="primary">添加事项</a-button>
+    <a-button type="primary" @click="addItemToList">添加事项</a-button>
 
     <a-list bordered :dataSource="list" class="dt_list">
       <a-list-item slot="renderItem" slot-scope="item">
@@ -49,6 +49,12 @@ export default {
   methods: {
     handleInputChange(e) {
       this.$store.commit('setInputValue', e.target.value)
+    },
+    addItemToList() {
+      if (this.inputValue.trim().length <= 0) {
+        return this.$message.warning('文本框内容不能为空！')
+      }
+      this.$store.commit('addItem')
     }
   }
 }

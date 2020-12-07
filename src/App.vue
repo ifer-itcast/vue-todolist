@@ -27,7 +27,7 @@
           <a-button>已完成</a-button>
         </a-button-group>
         <!-- 把已经完成的任务清空 -->
-        <a>清除已完成</a>
+        <a @click="clean">清除已完成</a>
       </div>
     </a-list>
   </div>
@@ -70,6 +70,10 @@ export default {
         done: e.target.checked
       }
       this.$store.commit('changeStatus', param)
+    },
+    // 清除已完成
+    clean() {
+      this.$store.commit('cleanDone')
     }
   }
 }

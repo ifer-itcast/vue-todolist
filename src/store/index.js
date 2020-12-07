@@ -36,6 +36,10 @@ export default new Vuex.Store({
     changeStatus(state, param) {
       const idx = state.list.findIndex(item => item.id === param.id)
       if (idx !== -1) state.list[idx].done = param.done
+    },
+    // 清除已完成，即保留未完成
+    cleanDone(state) {
+      state.list = state.list.filter(x => !x.done)
     }
   },
   actions: {
